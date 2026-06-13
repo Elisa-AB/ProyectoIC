@@ -11,47 +11,32 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # Permisos necesarios para que el bot pueda enviar correos internos
-    permissions:
-      actions: read
-      contents: read
-      statuses: write
-
     steps:
+    # Código: Descarga el código del repositorio al servidor de IC
     - name: Checkout del codigo
       uses: actions/checkout@v4
 
+    # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
     - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
 
+    # Build Automatizada: Instala el entorno base definido en el package.json
     - name: Instalar dependencias
       run: npm install
 
+    # Inspección de código: Valida la sintaxis del proyecto
     - name: Ejecutar Linter
       run: npm run lint
 
+    # Pruebas automatizadas: Corre los tests unitarios simulados
     - name: Ejecutar Pruebas
       run: npm test
 
-    # MECANISMO DE FEEDBACK: Envío del resultado por correo usando el sistema nativo de GitHub
-    - name: Enviar reporte de pruebas por Correo
-      uses: actions/github-script@v7
-      if: always() # Esto asegura que el correo te llegue SIEMPRE (éxito o fallo)
-      with:
-        script: |
-          const repoName = context.repo.repo;
-          const runId = context.runId;
-          const status = "${{ job.status }}";
-          const commit = context.sha.substring(0, 7);
-          
-          console.log(`Enviando reporte de pruebas para el commit ${commit} con estado: ${status}`);
-          // GitHub procesa esta instrucción interna y te despacha el mail oficial del Servidor de IC
-
   # --- ETAPA 2: ENTREGA CONTINUA (CD) ---
   deploy:
-    needs: build-and-test
+    needs: build-and-test # Bloqueo de seguridad: Solo despliega si la etapa de CI dio verde
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
@@ -59,8 +44,9 @@ jobs:
     - name: Checkout del codigo
       uses: actions/checkout@v4
 
+    # Despliegue en Entorno de Entrega (GitHub Pages como entorno de Producción)
     - name: Desplegar en GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: .
-        branch: gh-pages
+        folder: . # Despliega la raíz del proyecto donde está tu index.html
+        branch: gh-pages # Rama destino para el servidor web nativo
