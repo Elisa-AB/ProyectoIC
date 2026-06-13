@@ -21,33 +21,57 @@ jobs:
     - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
-        node-on-version: '20'
+        node-version: '20'
 
-    # Build Automatizada: Instalamos dependencias (linters, minificadores si usas, etc.)
+    # Build Automatizada: Instala el entorno base definido en el package.json
     - name: Instalar dependencias (Build Local)
       run: npm install
 
-    # Inspección de código: Validamos que el HTML/JS no tenga errores de sintaxis
+    # Inspección de código: Valida la sintaxis del proyecto
     - name: Ejecutar Linter (Inspección de código)
       run: npm run lint
 
-    # Pruebas automatizadas: Corremos los tests unitarios o de integración
+    # Pruebas automatizadas: Corre los tests unitarios simulados
     - name: Ejecutar Pruebas Automatizadas
       run: npm test
 
+    # Mecanismo de Feedback: Notificación automatizada por Correo Electrónico
+    - name: Enviar resultados por Correo
+      uses: dawidd6/action-send-mail@v3
+      if: always() # Asegura que te avise tanto si las pruebas pasan como si fallan
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        secure: true
+        username: ${{ secrets.CORREO_DESTINO }}
+        password: ${{ secrets.GITHUB_TOKEN }} # Token automático temporal de GitHub
+        subject: "Resultado del Pipeline IC: ${{ job.status }}"
+        to: ${{ secrets.CORREO_DESTINO }}
+        from: "Servidor de IC (GitHub Actions)"
+        body: |
+          Hola Elisa,
+          
+          El pipeline de Integración Continua ha finalizado en el servidor.
+          
+          Estado final del proceso: ${{ job.status }}
+          Rama evaluada: ${{ github.ref_name }}
+          Commit: ${{ github.sha }}
+          
+          Puedes revisar el log detallado de las pruebas en la pestaña Actions de tu repositorio.
+
   # --- ETAPA 2: ENTREGA CONTINUA (CD) ---
   deploy:
-    needs: build-and-test # Solo se ejecuta si la etapa de CI pasa con éxito
+    needs: build-and-test # Bloqueo de seguridad: Solo despliega si la etapa de CI dio verde
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # Solo despliega cuando se hace push a main
+    if: github.ref == 'refs/heads/main' # Solo se ejecuta al consolidar cambios en main
 
     steps:
     - name: Checkout del código
       uses: actions/checkout@v4
 
-    # Despliegue en Entorno de Entrega (Ejemplo usando GitHub Pages)
-    - name: Desplegar en GitHub Pages (Entorno de Producción)
+    # Despliegue en Entorno de Entrega (GitHub Pages como entorno de Producción)
+    - name: Desplegar en GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: . # Despliega la raíz del proyecto (donde está tu index.html)
-        branch: gh-pages # Rama destino para el entorno web
+        folder: . # Despliega la raíz del proyecto donde está tu index.html
+        branch: gh-pages # Rama destino para el servidor web nativo
