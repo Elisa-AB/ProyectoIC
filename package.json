@@ -4,11 +4,14 @@
   "description": "Evaluacion de Integracion Continua",
   "main": "index.html",
   "scripts": {
-    "test:spec-required": "grep -q \"$(grep -o '\"Minoli\"' spec.json | tr -d '\"')\" index.html && grep -q \"$(grep -o '\"V&V\"' spec.json | tr -d '\"')\" index.html",
-    "test:spec-forbidden": "! grep -qi \"$(grep -o '\"grupo\"' spec.json | tr -d '\"')\" index.html",
-    "test": "npm run test:spec-required && npm run test:spec-forbidden",
+    "test:spec-profesor": "grep -q \"$(grep -o '\"Minoli\"' spec.json | tr -d '\"')\" index.html",
+    "test:spec-alumna": "grep -q \"$(grep -o '\"Elisa Brites\"' spec.json | tr -d '\"')\" index.html",
+    "test:spec-legajo": "grep -q \"$(grep -o '\"28028\"' spec.json | tr -d '\"')\" index.html",
+    "test:spec-equipo": "grep -q \"$(grep -o '\"V&V\"' spec.json | tr -d '\"')\" index.html",
+    "test:spec-prohibido": "! grep -qi \"$(grep -o '\"grupo\"' spec.json | tr -d '\"')\" index.html",
+    "test": "npm run test:spec-profesor && npm run test:spec-alumna && npm run test:spec-legajo && npm run test:spec-equipo && npm run test:spec-prohibido",
     "lint": "echo 'Linter simulado pasado'"
-  },
+  }
   "author": "",
   "license": "ISC"
 }
