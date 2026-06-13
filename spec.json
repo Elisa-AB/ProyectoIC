@@ -1,0 +1,15 @@
+{
+  "project": "Portada Institucional UTN",
+  "version": "1.0.0",
+  "specifications": {
+    "required_strings": [
+      "Minoli",
+      "Elisa Brites",
+      "28028",
+      "V&V"
+    ],
+    "forbidden_strings": [
+      "grupo"
+    ]
+  }
+}

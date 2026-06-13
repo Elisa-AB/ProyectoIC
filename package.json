@@ -4,9 +4,9 @@
   "description": "Evaluacion de Integracion Continua",
   "main": "index.html",
   "scripts": {
-    "test:minoli": "grep -q 'Minoli' index.html",
-    "test:grupo": "! grep -qi 'grupo' index.html",
-    "test": "npm run test:minoli && npm run test:grupo",
+    "test:spec-required": "grep -q \"$(grep -o '\"Minoli\"' spec.json | tr -d '\"')\" index.html && grep -q \"$(grep -o '\"V&V\"' spec.json | tr -d '\"')\" index.html",
+    "test:spec-forbidden": "! grep -qi \"$(grep -o '\"grupo\"' spec.json | tr -d '\"')\" index.html",
+    "test": "npm run test:spec-required && npm run test:spec-forbidden",
     "lint": "echo 'Linter simulado pasado'"
   },
   "author": "",
