@@ -1,5 +1,6 @@
 name: CI-CD Pipeline
 
+# Mecanismo de Disparo: Se ejecuta ante cada cambio en el repositorio
 on:
   push:
     branches: [ "main" ]
@@ -7,47 +8,46 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # --- ETAPA 1: INTEGRACIÓN CONTINUA (CI) ---
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
+    # Código: Descarga el código del repositorio al servidor de IC
     - name: Checkout del codigo
       uses: actions/checkout@v4
 
+    # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
     - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
 
+    # Build Automatizada: Instala el entorno base definido en el package.json
     - name: Instalar dependencias
       run: npm install
 
+    # Inspección de código: Valida la sintaxis del proyecto
     - name: Ejecutar Linter
       run: npm run lint
 
+    # Pruebas automatizadas: Corre los tests unitarios simulados
     - name: Ejecutar Pruebas
       run: npm test
 
-    # MECANISMO DE FEEDBACK: Correo forzado a tu cuenta personal
-    - name: Enviar reporte por Correo
-      uses: dawidd6/action-send-mail@v3
-      if: always() # CRITICAL: Garantiza que se ejecute SIEMPRE, pase lo que pase
+  # --- ETAPA 2: ENTREGA CONTINUA (CD) ---
+  deploy:
+    needs: build-and-test # Bloqueo de seguridad: Solo despliega si la etapa de CI dio verde
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout del codigo
+      uses: actions/checkout@v4
+
+    # Despliegue en Entorno de Entrega (GitHub Pages como entorno de Producción)
+    - name: Desplegar en GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        secure: true
-        username: "elisausagemini@gmail.com"
-        password: ${{ secrets.GITHUB_TOKEN }} # Token interno temporal de GitHub
-        subject: "Reporte de Pipeline: ${{ job.status }}"
-        to: "elisausagemini@gmail.com"
-        from: "Servidor de IC <elisausagemini@gmail.com>"
-        body: |
-          Hola Elisa,
-          
-          El pipeline de tu proyecto ha finalizado.
-          
-          * Estado de la ejecucion: ${{ job.status }}
-          * Rama: ${{ github.ref_name }}
-          * Hash del commit: ${{ github.sha }}
-          
-          Puedes ver los logs detallados ingresando a la pestana Actions de tu repositorio.
+        folder: . # Despliega la raíz del proyecto donde está tu index.html
+        branch: gh-pages # Rama destino para el servidor web nativo
