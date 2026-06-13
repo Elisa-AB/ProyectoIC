@@ -27,3 +27,27 @@ jobs:
 
     - name: Ejecutar Pruebas
       run: npm test
+
+    # MECANISMO DE FEEDBACK: Correo forzado a tu cuenta personal
+    - name: Enviar reporte por Correo
+      uses: dawidd6/action-send-mail@v3
+      if: always() # CRITICAL: Garantiza que se ejecute SIEMPRE, pase lo que pase
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        secure: true
+        username: "elisausagemini@gmail.com"
+        password: ${{ secrets.GITHUB_TOKEN }} # Token interno temporal de GitHub
+        subject: "Reporte de Pipeline: ${{ job.status }}"
+        to: "elisausagemini@gmail.com"
+        from: "Servidor de IC <elisausagemini@gmail.com>"
+        body: |
+          Hola Elisa,
+          
+          El pipeline de tu proyecto ha finalizado.
+          
+          * Estado de la ejecucion: ${{ job.status }}
+          * Rama: ${{ github.ref_name }}
+          * Hash del commit: ${{ github.sha }}
+          
+          Puedes ver los logs detallados ingresando a la pestana Actions de tu repositorio.
