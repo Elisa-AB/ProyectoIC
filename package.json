@@ -11,7 +11,7 @@
     "test:spec-prohibido": "! grep -qi \"$(grep -o '\"grupo\"' spec.json | tr -d '\"')\" index.html",
     "test": "npm run test:spec-profesor && npm run test:spec-alumna && npm run test:spec-legajo && npm run test:spec-equipo && npm run test:spec-prohibido",
     "lint": "echo 'Linter simulado pasado'"
-  }
+  },
   "author": "",
   "license": "ISC"
 }
