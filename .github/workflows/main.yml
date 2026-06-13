@@ -43,7 +43,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 465
         secure: true
-        username: ${{ secrets.CORREO_DESTINO }}
+        username: "elisausagemini@gmail.com"
         password: ${{ secrets.GITHUB_TOKEN }} # Token automático temporal de GitHub
         subject: "Resultado del Pipeline IC: ${{ job.status }}"
         to: ${{ secrets.CORREO_DESTINO }}
