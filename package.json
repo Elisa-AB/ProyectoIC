@@ -4,9 +4,11 @@
   "description": "Evaluacion de Integracion Continua",
   "main": "index.html",
   "scripts": {
-  "test": "grep -q 'Minoli' index.html && ! grep -q 'grupo' index.html",
-  "lint": "echo 'Linter simulado pasado'"
-},
+    "test:minoli": "grep -q 'Minoli' index.html",
+    "test:grupo": "! grep -qi 'grupo' index.html",
+    "test": "npm run test:minoli && npm run test:grupo",
+    "lint": "echo 'Linter simulado pasado'"
+  },
   "author": "",
   "license": "ISC"
 }
