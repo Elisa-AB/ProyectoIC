@@ -1,21 +1,139 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segundo Parcial CI/CD - UTN</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Segundo parcial CI/CD</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1> Ingeniería y Calidad de Software </h1>
-        <h2> Brites, Elisa</h2>
-        <h2> A ver qué pasa ahora </h2>
-        <h2> Profe Manolo</h2>
-        <h2> Equipo V&V</h2>
-        <script src="" async defer></script>
-    </body>
-    <div>
+        .portada-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .logo-utn {
+            max-width: 280px;
+            height: auto;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitulo-proyecto {
+            font-family: sans-serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .seccion-datos {
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+            max-width: 450px;
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+        }
+
+        .seccion-datos ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .seccion-datos li {
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .valores-centrados {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-top: 12px;
+            margin-bottom: 25px;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        .legajo {
+            font-family: sans-serif;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portada-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/UTN_logo.jpg" alt="Logo UTN" class="logo-utn">
+
+        <h1>Ingeniería y Calidad<br>del Software</h1>
+
+        <div class="subtitulo-proyecto">Segunda Instancia de Evaluación <br> Integración y Entrega continua</div>
+
+        <div class="seccion-datos">
+            <ul>
+                <li>Equipo docente:</li>
+            </ul>
+            <div class="valores-centrados">
+                Dr. Mariano Minoli<br>
+                Dra. Verónica Bollati<br>
+                Ing. Marcela Arias<br>
+                Ing. María José Ojeda
+            </div>
+        </div>
+
+        <div class="seccion-datos">
+            <ul>
+                <li>Alumna:</li>
+            </ul>
+            <div class="valores-centrados">
+                Elisa Brites
+            </div>
+        </div>
+
+        <div class="seccion-datos">
+            <ul>
+                <li>Equipo:</li>
+            </ul>
+            <div class="valores-centrados">
+                V&V
+            </div>
+        </div>
+
+        <div class="seccion-datos">
+            <ul>
+                <li>Número de Legajo:</li>
+            </ul>
+            <div class="valores-centrados legajo">
+                28028
+            </div>
+        </div>
+    </div>
+
+</body>
 </html>
