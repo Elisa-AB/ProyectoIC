@@ -4,7 +4,7 @@
   "description": "Evaluacion de Integracion Continua",
   "main": "index.html",
   "scripts": {
-  "test": "grep -q 'Minoli' index.html",
+  "test": "grep -q 'Minoli' index.html && ! grep -q 'grupo' index.html",
   "lint": "echo 'Linter simulado pasado'"
 },
   "author": "",
