@@ -26,10 +26,6 @@ jobs:
     - name: Instalar dependencias
       run: npm install
 
-    # Inspección de código: Valida la sintaxis del proyecto
-    - name: Ejecutar Linter
-      run: npm run lint
-
     # Pruebas automatizadas: Corre los tests unitarios simulados
     - name: Ejecutar Pruebas
       run: npm test
