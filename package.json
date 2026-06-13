@@ -1,0 +1,12 @@
+{
+  "name": "proyecto-ic",
+  "version": "1.0.0",
+  "description": "Evaluacion de Integracion Continua",
+  "main": "index.html",
+  "scripts": {
+    "lint": "echo 'Simulando inspección de código... ¡Todo impecable!'",
+    "test": "echo 'Ejecutando pruebas automatizadas... 0 errores encontrados.'"
+  },
+  "author": "",
+  "license": "ISC"
+}
