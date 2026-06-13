@@ -1,0 +1,53 @@
+name: CI/CD Pipeline para Proyecto HTML
+
+# 1. MECANISMO DE DISPARO (Se ejecuta ante cada cambio en el repositorio)
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # --- ETAPA 1: INTEGRACIÓN CONTINUA (CI) ---
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Código: Descarga el código del repositorio al servidor de IC
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-on-version: '20'
+
+    # Build Automatizada: Instalamos dependencias (linters, minificadores si usas, etc.)
+    - name: Instalar dependencias (Build Local)
+      run: npm install
+
+    # Inspección de código: Validamos que el HTML/JS no tenga errores de sintaxis
+    - name: Ejecutar Linter (Inspección de código)
+      run: npm run lint
+
+    # Pruebas automatizadas: Corremos los tests unitarios o de integración
+    - name: Ejecutar Pruebas Automatizadas
+      run: npm test
+
+  # --- ETAPA 2: ENTREGA CONTINUA (CD) ---
+  deploy:
+    needs: build-and-test # Solo se ejecuta si la etapa de CI pasa con éxito
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Solo despliega cuando se hace push a main
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # Despliegue en Entorno de Entrega (Ejemplo usando GitHub Pages)
+    - name: Desplegar en GitHub Pages (Entorno de Producción)
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: . # Despliega la raíz del proyecto (donde está tu index.html)
+        branch: gh-pages # Rama destino para el entorno web
