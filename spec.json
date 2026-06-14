@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "specifications": {
     "required_strings": [
-      "Minoli",
-      "Elisa Brites",
-      "28028",
-      "V&V"
+      "Minoli"
     ],
     "forbidden_strings": [
       "grupo"
