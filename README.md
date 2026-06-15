@@ -23,8 +23,8 @@ El flujo de automatización está desarrollado mediante **GitHub Actions** y se 
 2. **Entrega Continua (CD - `deploy`):**
    * Requiere estrictamente que la etapa de CI finalice con éxito (`needs: build-and-test`).
    * Posee un filtro de entorno de seguridad estricto (`if: github.ref == 'refs/heads/main'`), asegurando que solo los cambios consolidados en la rama de producción sean elegibles para el despliegue.
-   * Compila y despliega el artefacto de forma automatizada en **GitHub Pages**.
-   * Envía una notificación de éxito a Slack con la URL productiva del sitio.
+   * Despliegue Desacoplado: En lugar de utilizar almacenamiento nativo del proveedor de Git, el pipeline interactúa de forma segura con **Render** mediante un **Deploy Hook (Webhook)** automatizado.
+   * Feedback de Éxito: Al consolidarse el despliegue, envía una notificación síncrona a Slack incluyendo la URL productiva del sitio en Render.
 
 ---
 

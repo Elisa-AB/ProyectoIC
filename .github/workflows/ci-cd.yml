@@ -42,9 +42,9 @@ jobs:
         status: ${{ job.status }}
         notification_title: "❌ ¡La etapa de Integración Continua ha fallado!"
         message_format: |
-          *Descripción:* Falló el análisis estático o la suite de QA en el servidor de IC.
+          *Descripción:* El pipeline de IC se ha detenido en el entorno de build.
           *Rama:* `${{ github.ref_name }}`
-          *Disparado por:* @${{ github.actor }}
+          *Autor del Cambio* @${{ github.actor }}
           *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -69,11 +69,11 @@ jobs:
       uses: ravsamhq/notify-slack-action@v2
       with:
         status: ${{ job.status }}
-        notification_title: "🚀 ¡Despliegue Exitoso en Producción (Render)!"
+        notification_title: "🚀 ¡Despliegue Exitoso en Producción!"
         message_format: |
           *Descripción:* El artefacto pasó QA y se ordenó el despliegue a producción.
           *Rama:* `${{ github.ref_name }}`
           *Disparado por:* @${{ github.actor }}
-          *Entorno Productivo:* <https://dashboard.render.com|Render Web Service>
+          *Entorno Productivo:* https://proyectoic-elisa.onrender.com
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
