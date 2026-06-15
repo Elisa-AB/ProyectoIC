@@ -30,6 +30,21 @@ jobs:
     - name: Ejecutar Pruebas
       run: npm test
 
+    # --- FEEDBACK EN CASO DE FALLA EN LA INTEGRACIÓN ---
+    - name: 🚨 Notificar Falla en Slack
+      if: failure() # Solo se activa si la build o los tests fallan
+      uses: ravsamhq/notify-slack-action@v2
+      with:
+        status: ${{ job.status }}
+        notification_title: "❌ ¡La etapa de Integración Continua ha fallado!"
+        message_format: |
+          *Descripción:* La suite de pruebas dinámicas o la build del entorno han colapsado en el servidor de IC.
+          *Rama:* `${{ github.ref_name }}`
+          *Disparado por:* @${{ github.actor }}
+          *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
   # --- ETAPA 2: ENTREGA CONTINUA (CD) ---
   deploy:
     needs: build-and-test # Bloqueo de seguridad: Solo despliega si la etapa de CI dio verde
@@ -46,3 +61,19 @@ jobs:
       with:
         folder: . # Despliega la raíz del proyecto donde está tu index.html
         branch: gh-pages # Rama destino para el servidor web nativo
+
+    # --- FEEDBACK EN CASO DE ÉXITO EN EL DESPLIEGUE ---
+    - name: 🎉 Notificar Éxito en Slack
+      if: success() # Solo se activa si el despliegue termina correctamente
+      uses: ravsamhq/notify-slack-action@v2
+      with:
+        status: ${{ job.status }}
+        notification_title: "🚀 ¡Despliegue Exitoso en Producción!"
+        message_format: |
+          *Descripción:* El artefacto de software ha pasado todas las aserciones de QA y se encuentra disponible en la web.
+          *Rama:* `${{ github.ref_name }}`
+          *Disparado por:* @${{ github.actor }}
+          *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
+          *URL de Producción:* https://elisa-ab.github.io/ProyectoIC/
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
