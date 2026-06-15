@@ -41,7 +41,7 @@ Las aserciones de calidad se ejecutan a nivel de caja negra sobre el documento `
 Para replicar el comportamiento del servidor de IC en un entorno local, ejecute los siguientes comandos en su terminal:
 
 ### Pre-requisitos
-* Tener instalado [Node.js](https://nodejs.org/) (Versión 20 recomendada).
+* Tener instalado [Node.js](https://nodejs.org/) (Versión 22 recomendada).
 * Consola basada en UNIX (Git Bash, Terminal de macOS o Linux).
 
 ### Pasos para la instalación
