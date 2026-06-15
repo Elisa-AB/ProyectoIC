@@ -16,13 +16,12 @@ jobs:
     - name: Checkout del codigo
       uses: actions/checkout@v4
 
-# === NUEVA SUB-ETAPA: ANÁLISIS ESTÁTICO (FAIL FAST) ===
+# === SUB-ETAPA: ANÁLISIS ESTÁTICO (FAIL FAST) ===
     - name: Validar sintaxis y estructura (HTML Linter)
-      uses: htmlhint/htmlhint-action@v2
+      uses: htmlhint/action-htmlhint@v2.0.2  
       with:
-        addresses: 'index.html' # Examina con lupa tu archivo de producción
-
-    # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
+        files: 'index.html' 
+        
     - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
