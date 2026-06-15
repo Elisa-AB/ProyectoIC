@@ -3,8 +3,6 @@ name: CI-CD Pipeline
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   # --- ETAPA 1: INTEGRACIÓN CONTINUA (CI) ---
@@ -15,6 +13,12 @@ jobs:
     # Código: Descarga el código del repositorio al servidor de IC
     - name: Checkout del codigo
       uses: actions/checkout@v4
+
+# === NUEVA SUB-ETAPA: ANÁLISIS ESTÁTICO (FAIL FAST) ===
+    - name: Validar sintaxis y estructura (HTML Linter)
+      uses: htmlhint/htmlhint-action@v2
+      with:
+        addresses: 'index.html' # Examina con lupa tu archivo de producción
 
     # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
     - name: Configurar Node.js
