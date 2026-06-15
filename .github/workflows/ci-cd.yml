@@ -16,9 +16,7 @@ jobs:
     - name: Checkout del codigo
       uses: actions/checkout@v4
 
-    # Inspección de código: Valida la sintaxis simulada en el package.json
-    - name: Ejecutar Linter
-      run: npm run lint
+
 
     # Entorno de desarrollo / Build: Configuramos Node.js para herramientas de calidad
     - name: Configurar Node.js
@@ -29,6 +27,10 @@ jobs:
     # Build Automatizada: Instala el entorno base definido en el package.json
     - name: Instalar dependencias
       run: npm install
+
+    # Inspección de código: Valida la sintaxis simulada en el package.json
+    - name: Ejecutar Linter
+      run: npm run lint
 
     # Pruebas automatizadas: Corre los tests funcionales (Spec-Driven Development)
     - name: Ejecutar Pruebas

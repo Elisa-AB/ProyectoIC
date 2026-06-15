@@ -16,7 +16,7 @@ El flujo de automatización está desarrollado mediante **GitHub Actions** y se 
 1. **Integración Continua (CI - `build-and-test`):**
    * Se dispara automáticamente ante cualquier `push` o `pull_request` en las ramas `main` y `dev`.
    * Realiza un análisis estático de infraestructura simulado (`npm run lint`).
-   * Levanta un contenedor virtualizado (`ubuntu-latest`) con el entorno de ejecución **Node.js v20**.
+   * Levanta un contenedor virtualizado (`ubuntu-latest`) con el entorno de ejecución **Node.js v22**.
    * Instala dependencias y ejecuta la suite de pruebas dinámicas funcionales (`npm test`).
    * **Sistema de Feedback:** En caso de que cualquier paso falle, se intercepta el estado del ciclo de vida y se despacha una notificación síncrona en tiempo real al canal de **Slack**.
 
