@@ -6,7 +6,7 @@
 "scripts": {
     "test:spec-profesor": "VALOR=$(node -p \"require('./spec.json').specifications.required_strings[0]\"); if [ -z \"$VALOR\" ]; then exit 1; fi; grep -q \"$VALOR\" index.html",
     "test:spec-prohibido": "VALOR=$(node -p \"require('./spec.json').specifications.forbidden_strings[0]\"); if [ -z \"$VALOR\" ]; then exit 1; fi; ! grep -qi \"$VALOR\" index.html",
-    "test:integridad-logo": "curl -sI \"https://upload.wikimedia.org/wikipedia/commons/6/67/UTN_logo.jpg\" | grep -q \"200 OK\"",
+    "test:integridad-logo": "curl -sI -A \"Mozilla/5.0\" \"https://upload.wikimedia.org/wikipedia/commons/6/67/UTN_logo.jpg\" | grep -q \"200 OK\"",
     "test": "npm run test:spec-profesor && npm run test:spec-prohibido && npm run test:integridad-logo",
     "lint": "echo 'Linter simulado pasado'"
   },
