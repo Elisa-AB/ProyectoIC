@@ -37,6 +37,10 @@ Las aserciones de calidad se ejecutan a nivel de caja negra sobre el documento `
 
 ---
 
+<img width="1059" height="590" alt="Captura de pantalla 2026-06-16 a la(s) 20 14 56" src="https://github.com/user-attachments/assets/6124a2e5-0836-46bf-a950-0f2dccefc9d6" />
+
+
+
 ##  Guía de Ejecución Local
 
 Para replicar el comportamiento del servidor de IC en un entorno local, ejecute los siguientes comandos en su terminal:
