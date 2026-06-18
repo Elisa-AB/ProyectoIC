@@ -5,7 +5,7 @@
   "main": "index.html",
 "scripts": {
   "lint": "html-validate index.html",
-  "test:spec-profesor": "grep -q \"Minoli\" index.html",
+  "test:spec-profesor": "grep -qw \"Minoli\" index.html",
   "test:spec-prohibido": "! grep -qE \"[Gg]rupo\" index.html",
   "test": "npm run lint && npm run test:spec-profesor && npm run test:spec-prohibido"
 },
