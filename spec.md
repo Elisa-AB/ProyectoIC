@@ -30,7 +30,6 @@ El objetivo de este proyecto es diseñar, validar e implementar una pipeline de 
 * `├── package.json` (Manifiesto del proyecto, metadatos y alias de scripts de QA)
 * `├── README.md` (Documentación viva de la arquitectura general del sistema)
 * `├── spec.md` (Contrato de especificaciones)
-* `├── rules.json` (Contrato de requerimientos de strings)
 * `└── style.css` (Hoja de estilos de diseño de la carátula digital)
 
 ## 5. Code Style / Estilo de Código y Convenciones
@@ -51,7 +50,7 @@ Ejemplo de código válido según el estándar del linter:
 
 ## 6. Testing Strategy / Estrategia de Pruebas
 * **Framework:** `Scripts utilitarios nativos basados en Node.js y comandos del sistema operativo (grep).`
-* **Ubicación de Criterios:** `rules.json en la raíz del proyecto.`
+* **Ubicación de Criterios / Criteria Location:** `Centralizados directamente dentro del manifiesto package.json (Scripts autocontenidos)`.
 * **Niveles de Test:**
 * **Fase Sintáctica (Lint):** `Bloquea el pipeline si la carátula presenta advertencias o errores de estructura HTML.`
 * **Fase Funcional (Test):** `Escaneo dinámico en la carátula por exclusión/inclusión de strings. El código de salida de grep determina el éxito.`

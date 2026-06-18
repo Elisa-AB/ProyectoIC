@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Evaluacion de Integracion Continua",
   "main": "index.html",
-  "scripts": {
+"scripts": {
   "lint": "html-validate index.html",
-  "test:spec-profesor": "VALOR=$(node -p \"require('./rules.json').specifications.required_strings[0]\") && grep -q \"$VALOR\" index.html",
-  "test:spec-prohibido": "VALOR=$(node -p \"require('./rules.json').specifications.forbidden_strings[0]\") && ! grep -q \"$VALOR\" index.html",
+  "test:spec-profesor": "grep -q \"Minoli\" index.html",
+  "test:spec-prohibido": "! grep -qE \"[Gg]rupo\" index.html",
   "test": "npm run lint && npm run test:spec-profesor && npm run test:spec-prohibido"
-  },
+},
   "author": "",
   "license": "ISC",
   "devDependencies": {
