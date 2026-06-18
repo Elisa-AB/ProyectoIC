@@ -1,13 +1,13 @@
 # Design Spec / Contrato de Especificaciones Técnicas: Automated Cover Project Pipeline
 
 ## 1. Objective / Objetivo
-El objetivo de este proyecto es diseñar, validar e implementar una pipeline de `Integración Continua y Entrega Continua (CI/CD)` para el despliegue de la `carátula digital interactiva` de nuestra entrega académica. El sistema garantiza la filosofía `Fail-Fast`: impide de forma absoluta que cualquier cambio en la portada que viole las restricciones sintácticas o los strings de la cátedra llegue al entorno de producción, manteniendo informados a los desarrolladores mediante alertas síncronas multicanal.
+El objetivo de este proyecto es diseñar, validar e implementar una pipeline de `Integración Continua y Entrega Continua (CI/CD)` para el despliegue de la `carátula digital` de nuestra entrega académica. El sistema garantiza la filosofía `Fail-Fast`: impide de forma absoluta que cualquier cambio en la portada que viole las restricciones sintácticas o los strings de la cátedra llegue al entorno de producción, manteniendo informados a los desarrolladores mediante alertas síncronas multicanal.
 
 ## 2. Tech Stack / Tecnologías Utilizadas
 * **Entorno de Ejecución (Runtime):** `Node.js v22`
 * **Gestor de Paquetes (Package Manager):** `npm v10+`
 * **Motor de IC/CD (CI/CD Engine):** `GitHub Actions (Runner: ubuntu-latest)`
-* **Linter Sintáctico (Linter):** `html-validate (Instalado localmente)`
+* **Linter Sintáctico (Linter):** `html-validate`
 * **Hosting de Producción (Production Environment):** `Render (Static Site)`
 * **Canales de Alertas (Feedback Channels):** `Slack Webhooks API & Gmail Service`
 
@@ -25,7 +25,7 @@ El objetivo de este proyecto es diseñar, validar e implementar una pipeline de 
 * `│       └── ci-cd.yml` (Orquestador central del pipeline de GitHub Actions)
 * `├── node_modules/` (Dependencias de desarrollo locales - Ignorado en Git)
 * `├── .gitignore` (Epecificación de la exclusión de ciertos archivos)
-* `├── index.html` (Código fuente de la carátula digital interactiva en Producción)
+* `├── index.html` (Código fuente de la carátula digital en Producción)
 * `├── package-lock.json` (Snapshot determinista y repetible de las dependencias)
 * `├── package.json` (Manifiesto del proyecto, metadatos y alias de scripts de QA)
 * `├── README.md` (Documentación viva de la arquitectura general del sistema)
